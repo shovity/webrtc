@@ -6,6 +6,7 @@ const http = require('http'),
 	path = require('path');
 
 var app = express();
+var port = process.env.PORT || 80;
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -17,6 +18,6 @@ app.get('/', (req, res, next) => {
 	res.render('home');
 })
 
-app.listen(80, () => {
-	console.log('Server running at 80');
+app.listen(port, () => {
+	console.log(`Server running at ${port}`);
 })

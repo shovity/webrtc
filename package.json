@@ -4,8 +4,7 @@
   "description": "First time with web RTC",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "Huong Nguyen (shovity@gmail.com)",
   "license": "ISC",
