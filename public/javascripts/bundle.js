@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 27);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -81,9 +81,9 @@
 
 
 
-var base64 = __webpack_require__(27)
-var ieee754 = __webpack_require__(28)
-var isArray = __webpack_require__(29)
+var base64 = __webpack_require__(28)
+var ieee754 = __webpack_require__(29)
+var isArray = __webpack_require__(30)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -2485,7 +2485,7 @@ var processNextTick = __webpack_require__(7);
 /*</replacement>*/
 
 /*<replacement>*/
-var isArray = __webpack_require__(19);
+var isArray = __webpack_require__(20);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -2517,7 +2517,7 @@ util.inherits = __webpack_require__(1);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(32);
+var debugUtil = __webpack_require__(33);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -2526,7 +2526,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(23);
+var BufferList = __webpack_require__(24);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -3635,7 +3635,7 @@ util.inherits = __webpack_require__(1);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(25)
+  deprecate: __webpack_require__(26)
 };
 /*</replacement>*/
 
@@ -4150,7 +4150,7 @@ function CorkedRequest(state) {
     }
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(31).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(32).setImmediate))
 
 /***/ }),
 /* 11 */
@@ -4700,11 +4700,11 @@ function base64DetectIncompleteChar(buffer) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = Peer
 
-var debug = __webpack_require__(16)('simple-peer')
-var getBrowserRTC = __webpack_require__(18)
+var debug = __webpack_require__(17)('simple-peer')
+var getBrowserRTC = __webpack_require__(19)
 var inherits = __webpack_require__(1)
-var randombytes = __webpack_require__(21)
-var stream = __webpack_require__(24)
+var randombytes = __webpack_require__(22)
+var stream = __webpack_require__(25)
 
 var MAX_BUFFERED_AMOUNT = 64 * 1024
 
@@ -5496,6 +5496,27 @@ function noop () {}
 /* 15 */
 /***/ (function(module, exports) {
 
+module.exports = (callback) => {
+
+    navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia;
+
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({ video: true, audio: true },
+            stream => callback(stream),
+            err => console.log("The following error occurred: " + err.name)
+        );
+    } else {
+        console.log("getUserMedia not supported");
+    }
+}
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
 module.exports = (stream, videoId) => {
 	var video = document.getElementById(videoId);
     video.srcObject = stream;
@@ -5505,7 +5526,7 @@ module.exports = (stream, videoId) => {
 }
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -5514,7 +5535,7 @@ module.exports = (stream, videoId) => {
  * Expose `debug()` as the module.
  */
 
-exports = module.exports = __webpack_require__(17);
+exports = module.exports = __webpack_require__(18);
 exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
@@ -5697,7 +5718,7 @@ function localstorage() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -5713,7 +5734,7 @@ exports.coerce = coerce;
 exports.disable = disable;
 exports.enable = enable;
 exports.enabled = enabled;
-exports.humanize = __webpack_require__(20);
+exports.humanize = __webpack_require__(21);
 
 /**
  * The currently active debug mode names, and names to skip.
@@ -5905,7 +5926,7 @@ function coerce(val) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 // originally pulled out of simple-peer
@@ -5926,7 +5947,7 @@ module.exports = function getBrowserRTC () {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -5937,7 +5958,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 /**
@@ -6095,7 +6116,7 @@ function plural(ms, n, name) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6139,7 +6160,7 @@ function randomBytes (size, cb) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(0).Buffer, __webpack_require__(3)))
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6171,7 +6192,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6241,7 +6262,7 @@ BufferList.prototype.concat = function (n) {
 };
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8);
@@ -6250,11 +6271,11 @@ exports.Readable = exports;
 exports.Writable = __webpack_require__(10);
 exports.Duplex = __webpack_require__(2);
 exports.Transform = __webpack_require__(9);
-exports.PassThrough = __webpack_require__(22);
+exports.PassThrough = __webpack_require__(23);
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -6328,39 +6349,48 @@ function config (name) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const getStream = __webpack_require__(33);
-const playVideo = __webpack_require__(15);
+const getStream = __webpack_require__(15);
+const playVideo = __webpack_require__(16);
 const Peer = __webpack_require__(14);
 
-let p = new Peer({ initiator: location.hash === '#1', trickle: false })
 let signal = document.getElementById('signal');
-
-p.on('error', function(err) { console.log('error', err) })
-
-p.on('signal', function(data) {
-    signal.value = JSON.stringify(data);
-})
-
-p.on('connect', () => {
-    console.log('Connected');
-})
-
 let btn = document.getElementById('btn');
 
-btn.addEventListener('click', () => {
-    p.signal(JSON.parse(signal.value));
-})
-
 getStream((stream) => {
-    playVideo(stream, 'local-video');
-})
+
+    let p = new Peer({ initiator: location.hash === '#1', trickle: false, stream: stream });
+    playVideo(stream, 'offer-video');
+
+    p.on('error', function(err) { console.log('error', err) });
+
+    p.on('signal', data => signal.value = JSON.stringify(data));
+
+    p.on('connect', () => {
+    	setInterval(() => {
+    		p.send('Connected, hey');
+    	}, 1000)
+    });
+
+    p.on('data', (data) => {
+    	console.log(data.toString());
+    });
+
+    p.on('stream', answerStream => {
+        playVideo(answerStream, 'answer-video');
+        console.log('on stream')
+    });
+
+    btn.addEventListener('click', () => {
+        p.signal(JSON.parse(signal.value));
+    });
+});
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6481,7 +6511,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -6571,7 +6601,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -6582,7 +6612,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -6775,7 +6805,7 @@ module.exports = Array.isArray || function (arr) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(3)))
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -6828,67 +6858,16 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(30);
+__webpack_require__(31);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
 /* 33 */
 /***/ (function(module, exports) {
 
-module.exports = (callback) => {
-    var videoSources = [];
-    var audioSources = [];
-
-    navigator.getUserMedia = navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia;
-
-    navigator.mediaDevices.enumerateDevices().then(function(sourceInfos) {
-        for (var i = 0; i !== sourceInfos.length; ++i) {
-            var sourceInfo = sourceInfos[i];
-
-            if (sourceInfo.kind === 'audioinput') {
-                audioSources.push(sourceInfo.deviceId);
-            } else if (sourceInfo.kind === 'videoinput') {
-                videoSources.push(sourceInfo.deviceId);
-            } else {
-                console.log('Some other kind of source: ', sourceInfo);
-            }
-        }
-    });
-
-    var constraints = {
-        audio: {
-            optional: [{
-                sourceId: audioSources[0]
-            }]
-        },
-        video: {
-            optional: [{
-                sourceId: videoSources[0]
-            }]
-        }
-    };
-
-    if (navigator.getUserMedia) {
-        navigator.getUserMedia(
-            constraints,
-            stream => callback(stream),
-            err => console.log("The following error occurred: " + err.name)
-        );
-    } else {
-        console.log("getUserMedia not supported");
-    }
-}
-
+/* (ignored) */
 
 /***/ })
 /******/ ]);

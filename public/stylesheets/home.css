@@ -3,9 +3,17 @@ body {
 	margin: 0;
 }
 
-#local-video {
+#offer-video {
 	position: fixed;
 	bottom: 0;
+	right: 0;
+	width: 300px;
+	border: 1px #333 solid;
+}
+
+#answer-video {
+	position: fixed;
+	top: 0;
 	right: 0;
 	width: 300px;
 	border: 1px #333 solid;

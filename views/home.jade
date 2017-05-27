@@ -1,14 +1,15 @@
 doctype html
 html
 	head
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
 		link(rel='stylesheet' type='text/css' href='stylesheets/home.css')
 	body
 		textarea(id='signal' placeholder='My signal')
 		br
 		button(id='btn') OK
-		video(id='local-video' controls)
+		video(id='offer-video')
+		video(id='answer-video')
 
-		input(type="file" accept="image/*" capture="camera")
 
 		script(src='javascripts/bundle.js')
 		//- script(src='javascripts/home.js')
