@@ -9,9 +9,11 @@
   "author": "Huong Nguyen (shovity@gmail.com)",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "jade": "^1.11.0",
-    "morgan": "^1.8.2"
+    "morgan": "^1.8.2",
+    "socket.io": "^2.0.1"
   },
   "devDependencies": {
     "simple-peer": "^8.1.0"

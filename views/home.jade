@@ -4,12 +4,43 @@ html
 		meta(name="viewport" content="width=device-width, initial-scale=1.0")
 		link(rel='stylesheet' type='text/css' href='stylesheets/home.css')
 	body
-		textarea(id='signal' placeholder='My signal')
-		br
-		button(id='btn') OK
-		video(id='offer-video')
-		video(id='answer-video')
+		video(id='answer-video' class='center')
 
+		video(id='offer-video' muted)
 
+		div(id='menu' class='open')
+			div(id='menu-content')
+				div(id='hi-box')
+					div Hi!~~  
+						strong(id='username') Username
+						span(id='logout' class='logout')
+
+				div(id='enter-box')
+					input(id='name' placeholder='Enter your name')
+					button(id='enter') OK
+
+				ul(id='list-user')
+					li 123456789
+						span(class='call')
+						span(class='meg')
+					li jljdf
+						span(class='call')
+						span(class='meg')
+					li jljdf
+						span(class='call')
+						span(class='meg')
+					li jljdf
+						span(class='call')
+						span(class='meg')
+					li jljdf
+						span(class='call')
+						span(class='meg')
+					li jljdf
+						span(class='call')
+						span(class='meg')
+
+			div(id='float')
+				div
+				div
+				div
 		script(src='javascripts/bundle.js')
-		//- script(src='javascripts/home.js')

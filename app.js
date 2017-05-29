@@ -3,21 +3,30 @@
 const http = require('http'),
 	express = require('express'),
 	logger = require('morgan'),
-	path = require('path');
+	path = require('path'),
+	cookieParser = require('cookie-parser');
 
-var app = express();
-var port = process.env.PORT || 80;
+const io = require('./socket'),
+	index = require('./routes/index');
 
+const port = process.env.PORT || 80,
+	host = '127.0.0.1';
+
+const app = express(),
+	server = http.createServer(app);
+
+app.use(cookieParser());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/', (req, res, next) => {
-	res.render('home');
+app.use(index);
+
+io.attach(server);
+
+server.listen(port, host, () => {
+	console.log(`Server listening at ${host}:${port}`);
 })
 
-app.listen(port, () => {
-	console.log(`Server running at ${port}`);
-})
