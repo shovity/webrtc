@@ -9,6 +9,14 @@ io.on('connection', socket => {
 		updateUsers();
 	})
 
+	socket.on('offer signal', data => {
+		io.sockets.connected[data.id].emit('offer signal', { signal:data.signal, id: socket.id });
+	})
+
+	socket.on('answer signal', (data) => {
+		io.sockets.connected[data.id].emit('answer signal', { signal:data.signal, id: socket.id });
+	})
+
 	socket.on('disconnect', () => {
 		var p = users.findIndex(user => user.id == socket.id);
 		if (p != -1) {
@@ -21,8 +29,6 @@ io.on('connection', socket => {
 
 function updateUsers() {
 	io.emit('update users', users);
-	console.log(users)
 }
-
 
 module.exports = io;

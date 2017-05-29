@@ -6,7 +6,8 @@ const getStream = require('./getStream'),
 	cookier = require('./cookier');
 
 var offerVideo = videoControl('offer-video'),
-	answerVideo = videoControl('answer-video');
+	answerVideo = videoControl('answer-video'),
+	stream = null;
 
 var menu = {
 	isOpen: true,
@@ -33,37 +34,11 @@ if (username != "") {
 	menu.enterBox.style.display = 'block';
 }
 
-// getStream((stream) => {
-
-//     let p = new Peer({ initiator: location.hash === '#1', trickle: false, stream: stream });
-//     offerVideo.setStream(stream);
-//     offerVideo.videoObject.play();
-
-//     // answerVideo.setStream(stream);answerVideo.videoObject.play();
-
-//     p.on('error', function(err) { console.log('error', err) });
-
-//     p.on('signal', data => signal.value = JSON.stringify(data));
-
-//     p.on('connect', () => {
-//     	setInterval(() => {
-//     		p.send('Connected, hey');
-//     	}, 1000)
-//     });
-
-//     p.on('data', (data) => {
-//     	console.log(data.toString());
-//     });
-
-//     p.on('stream', answerStream => {
-// 	    answerVideo.setStream(stream);
-// 	    answerVideo.videoObject.play();
-//     });
-
-//     btn.addEventListener('click', () => {
-//         p.signal(JSON.parse(signal.value));
-//     });
-// });
+getStream((data) => {
+	stream = data;
+	offerVideo.setStream(data);
+	offerVideo.play();
+})
 
 /**
  * Event
@@ -99,11 +74,50 @@ menu.logout.addEventListener('click', () => {
 socket.on('update users', users => {
 	menu.listUser.innerHTML = '';
 	users.forEach(user => {
-		menu.listUser.innerHTML += '<li>' + user.username + '<span class="call"></span><span class="meg"></span></li>';
+		let id = user.id;
+		var li = document.createElement('li');
+		li.innerHTML = user.username;
+
+		let spanCall = document.createElement('span');
+		spanCall.className = 'call';
+		spanCall.addEventListener('click', () => {
+			startCall(id);
+		});
+
+		let spanMeg = document.createElement('span');
+		spanMeg.className = 'meg';
+
+		li.appendChild(spanCall);
+		li.appendChild(spanMeg);
+
+		menu.listUser.appendChild(li);	
 	})
 })
 
+socket.on('offer signal', (data) => {
+	if (stream == null) {
+		console.log('Can\'t get your video stream!');
+	} else {
+		answerPeer = new Peer({trickle: false, stream}),
+		answerPeer.signal(data.signal);
 
+		answerPeer.on('signal', signal => {
+			console.log('Received offer signal, sending answer signal to server');
+			socket.emit('answer signal', { signal, id:data.id });
+		})
+
+		answerPeer.on('stream', stream => {
+			console.log('Answer peer on stream');
+			answerVideo.videoObject.style.display = 'block';
+			answerVideo.setStream(stream);
+			answerVideo.play();
+		})
+
+		answerPeer.on('connect', () => {
+			console.log('Answer peer connected');
+		})
+	}
+})
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -126,4 +140,32 @@ function setCookie(cname, cvalue, exdays = 360) {
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires="+d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires;
+}
+
+function startCall(id) {
+	if (stream == null) {
+		console.log('Can\'t get your video stream!');
+	} else {
+		var offerPeer = new Peer({initiator: true, trickle: false, stream});
+		offerPeer.on('signal', (signal) => {
+			console.log('Send offer signal to server')
+			socket.emit('offer signal', { id, signal });
+		})
+
+		socket.on('answer signal', data => {
+			console.log('Received answer signal')
+			offerPeer.signal(data.signal);
+
+			offerPeer.on('connect', () => {
+				console.log('Offer peer connected!');
+			})
+
+			offerPeer.on('stream', (stream) => {
+				console.log('Offer peer on stream');
+				answerVideo.videoObject.style.display = 'block';
+				answerVideo.setStream(stream);
+				answerVideo.play();
+			})
+		})
+	}
 }
