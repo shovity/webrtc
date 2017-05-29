@@ -9,8 +9,7 @@ const http = require('http'),
 const io = require('./socket'),
 	index = require('./routes/index');
 
-const port = process.env.PORT || 80,
-	host = '127.0.0.1';
+const port = process.env.PORT || 80;
 
 const app = express(),
 	server = http.createServer(app);
@@ -26,7 +25,7 @@ app.use(index);
 
 io.attach(server);
 
-server.listen(port, host, () => {
-	console.log(`Server listening at ${host}:${port}`);
+server.listen(port, () => {
+	console.log(`Server listening at ${port}`);
 })
 
