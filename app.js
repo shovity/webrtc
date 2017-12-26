@@ -9,7 +9,7 @@ const http = require('http'),
 const io = require('./socket'),
 	index = require('./routes/index');
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 
 const app = express(),
 	server = http.createServer(app);
